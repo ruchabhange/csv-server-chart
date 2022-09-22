@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-prometheus-service
+  labels:
+     {{- include "prometheus_labels" .| indent 4 }}
+spec:
+  ports:
+   - port: {{ .Values.ports.prom_service_port }}
+     name: {{ .Release.Name }}-prometheus-service
+  selector:
+     {{- include "prometheus_labels" .| indent 4 }}
+

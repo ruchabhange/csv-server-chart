@@ -1,0 +1,50 @@
+# Default values for csv-server.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicas: 1
+
+image:
+  repository: docker.io/infracloudio/csvserver
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+containers:
+  name: prometheus
+  repository: docker.io/prom/prometheus
+  pullPolicy: IfNotPresent
+  tag: "v2.36.2"
+
+env:
+  name: CSVSERVER_BORDER
+  value: Blue
+
+volumeMounts:
+  mountPath: /csvserver/inputdata
+  subPath: inputdata
+
+volumeClaimTemplates:
+  accessModes: ReadWriteOnce
+  storage: 1Gi
+
+ports:
+  protocol: TCP
+  port: 80
+  targetPort: 9300
+  prom_service_port: 9090
+
+prometheus:
+  scrape_interval: 10s
+
+inputdata:
+  - 0, 20970
+  - 1, 25257
+  - 2, 30188
+  - 3, 23844
+  - 4, 1407
+  - 5, 30192
+  - 6, 28077
+  - 7, 5285
+  - 8, 28197
+  - 9, 17778
+
