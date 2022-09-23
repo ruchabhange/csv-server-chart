@@ -6,6 +6,6 @@ spec:
   selector:
    {{- include "labels" .| indent 4 }}
   ports:
-    - protocol: {{ .Values.ports.protocol }}
-      port: {{ .Values.ports.port }}
-      targetPort: {{ .Values.ports.targetPort }}
+    - protocol: TCP
+      port: 80
+      targetPort: 9300
